@@ -1,0 +1,191 @@
+<div class="">
+  <div style="height:100vh;">
+
+   <div class="">
+    
+     <div class="shadow w-20 p-5 position-absolute top-50 start-50 translate-middle">
+       <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+         <h4 class="display-6 text-center py-2">Shopowner Database</h4>
+        <div class="">
+          <label for="sid">Shop Id</label>
+          <div class="">
+            <input id="sid" required #sid="ngModel" (ngModel)="sid" name="sid" type="text"  
+            class="form-control" placeholder="enter your sid" pattern="(^\d{9}$)">
+            <div *ngIf="sid.invalid && sid.touched">
+              <small class="text-danger" *ngIf="sid.errors?.['required']">Required
+
+              </small>
+              <small class="text-danger" *ngIf="sid.errors?.['pattern']">Must be a valid number
+              </small>
+
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="shop_name">Shop Name </label>
+          <div class="">
+            <input id="shop_name" required #shop_name="ngModel" (ngModel)="shop_name" name="shop_name" type="text"  
+            class="form-control" placeholder="enter your shop name">
+            <div *ngIf="shop_name.invalid && shop_name.touched">
+              <small class="text-danger" *ngIf="shop_name.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="owner_name">Owner Name </label>
+          <div class="">
+            <input id="owner_name" required #owner_name="ngModel" (ngModel)="owner_name" name="owner_name" type="text"  
+            class="form-control" placeholder="enter your owner name">
+            <div *ngIf="owner_name.invalid && owner_name.touched">
+              <small class="text-danger" *ngIf="owner_name.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="ph_number">Phone Number </label>
+          <div class="">
+            <input id="ph_number" required #Ph_Number="ngModel" (ngModel)="ph_number" name="ph_number" type="text"  
+            class="form-control" placeholder="enter your phone number">
+            <div *ngIf="ph_number.invalid && ph_number.touched">
+              <small class="text-danger" *ngIf="ph_number.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="pwd">Pwd </label>
+          <div class="">
+            <input id="pwd" required #pwd="ngModel" (ngModel)="pwd" name="pwd" type="text"  
+            class="form-control" placeholder="enter your pwd">
+            <div *ngIf="pwd.invalid && pwd.touched">
+              <small class="text-danger" *ngIf="pwd.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="form-group text-center">
+          <input class="btn btn-primary" type="submit" value="submit">
+        </div>
+      </form>
+     </div>
+   </div>
+</div><br>
+<div class="mt-5">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Shop Id</th>
+        <th>Shop Name</th>
+        <th>Owner Name</th>
+        <th>Phone Number</th>
+        <th>Pwd</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let shopowner of shopownerDetails">
+        <td>{{shopowner.sid}}</td>
+        <td>{{shopowner.shop_name}}</td>
+        <td>{{shopowner.owner_name}}</td>
+        <td>{{shopowner.ph_number}}</td>
+        <td>{{shopowner.pwd}}</td>
+        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(shopowner)">Edit</button></td>
+        <td><button type="button" class="btn btn-danger" (click)="deleteShopowner(shopowner)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Shopowner</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm" (ngSubmit)="updateShopowner()">
+          <h4 class="display-6 text-center py-2">Shopowner Database</h4>
+         <div class="">
+           <label for="sid">Shop Id </label>
+           <div class="">
+             <input id="sid" required #sid="ngModel" [(ngModel)]="shopownerToUpdate.sid" name="sid" type="text"  
+             class="form-control" placeholder="enter your sid" pattern="(^\d{9}$)">
+             <div *ngIf="sid.invalid && sid.touched">
+               <small class="text-danger" *ngIf="sid.errors?.['required']">Required
+ 
+               </small>
+               <small class="text-danger" *ngIf="sid.errors?.['pattern']">Must be a valid number
+               </small>
+ 
+             </div>
+             
+           </div>
+         </div><br>
+         <div class="">
+           <label for="shop_name">Shop Name </label>
+           <div class="">
+             <input id="shop_name" required #shop_name="ngModel" [(ngModel)]="shopownerToUpdate.shop_name" name="name" type="text"  
+             class="form-control" placeholder="enter your shop name">
+             <div *ngIf="shop_name.invalid && shop_name.touched">
+               <small class="text-danger" *ngIf="shop_name.errors?.['required']">Required
+               </small>
+             </div>
+             
+           </div>
+         </div><br>
+         <div class="">
+           <label for="owner_name">Owner Name </label>
+           <div class="">
+             <input id="owner_name" required #owner_name="ngModel" [(ngModel)]="shopownerToUpdate.owner_name" name="owner_name" type="text"  
+             class="form-control" placeholder="enter your owner name">
+             <div *ngIf="owner_name.invalid && owner_name.touched">
+               <small class="text-danger" *ngIf="owner_name.errors?.['required']">Required
+               </small>
+             </div>
+             
+           </div>
+         </div><br>
+         <div class="">
+           <label for="ph_number">Phone Number </label>
+           <div class="">
+             <input id="ph_number" required #ph_number="ngModel" [(ngModel)]="shopownerToUpdate.ph_number" name="ph_number" type="text"  
+             class="form-control" placeholder="enter your phone number">
+             <div *ngIf="ph_number.invalid && ph_number.touched">
+               <small class="text-danger" *ngIf="ph_number.errors?.['required']">Required
+               </small>
+             </div>
+             
+           </div>
+         </div><br>
+         <div class="">
+          <label for="pwd">Pwd </label>
+          <div class="">
+            <input id="pwd" required #pwd="ngModel" [(ngModel)]="shopownerToUpdate.pwd" name="pwd" type="text"  
+            class="form-control" placeholder="enter your pwd">
+            <div *ngIf="pwd.invalid && pwd.touched">
+              <small class="text-danger" *ngIf="pwd.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+         <div class="form-group text-center">
+           <input class="btn btn-primary" type="submit" value="update">
+         </div>
+       </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
